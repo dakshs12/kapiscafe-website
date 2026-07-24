@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-teal: #26BCB8;
+  --color-primary-mustard: #CE9E1D;
+  --color-secondary-white: #FDFFFC;
+  --color-secondary-brown: #362417;
+}
+
+body {
+  background-color: var(--color-secondary-white);
+  color: var(--color-secondary-brown);
+  font-family: Arial, Helvetica, sans-serif;
+}

@@ -1,3 +1,5 @@
+import CakeOrderForm from "@/components/CakeOrderForm";
+
 export default function CustomCakesPage() {
   return (
     <div className="flex flex-col flex-1">
@@ -12,7 +14,9 @@ export default function CustomCakesPage() {
         </div>
       </section>
       
-      {/* Additional sections go here */}
+      <section className="py-16 px-6 bg-[var(--color-secondary-white)]">
+        <CakeOrderForm />
+      </section>
     </div>
   );
 }

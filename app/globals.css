@@ -5,10 +5,16 @@
   --color-primary-mustard: #CE9E1D;
   --color-secondary-white: #FDFFFC;
   --color-secondary-brown: #362417;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 }
 
 body {
   background-color: var(--color-secondary-white);
   color: var(--color-secondary-brown);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-sans is applied via app/layout.tsx to the body tag */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
 }

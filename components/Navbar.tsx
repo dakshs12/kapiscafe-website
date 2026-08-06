@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between p-6 bg-secondary-white text-secondary-brown border-b border-primary-mustard/20">
+    <nav className="flex items-center justify-between p-4 md:p-6 lg:px-12 bg-secondary-white text-secondary-brown border-b border-primary-mustard/20">
       <div className="flex items-center">
         <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
           <Image 
@@ -11,11 +11,11 @@ export default function Navbar() {
             alt="Kapi's Bakehouse" 
             width={160} 
             height={60} 
-            className="w-32 sm:w-40 h-auto object-contain"
+            className="w-24 sm:w-32 md:w-40 h-auto object-contain"
           />
         </Link>
       </div>
-      <div className="flex gap-8 font-medium">
+      <div className="flex gap-4 sm:gap-6 md:gap-8 font-medium text-sm md:text-base">
         <Link href="/" className="hover:text-primary-teal transition-colors">
           Home
         </Link>

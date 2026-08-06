@@ -22,19 +22,19 @@ export default function HeroBanner() {
   return (
     <section 
       ref={container} 
-      className="flex flex-col items-center justify-center text-center py-32 px-6 flex-1 min-h-[80vh] relative overflow-hidden"
+      className="flex flex-col items-center justify-center text-center py-24 md:py-32 px-4 sm:px-6 flex-1 min-h-[80vh] relative overflow-hidden"
     >
       <div className="z-10 max-w-4xl mx-auto flex flex-col items-center">
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 text-secondary-brown">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-4 sm:mb-6 text-secondary-brown tracking-tight leading-tight">
           Kapi's Bakehouse
         </h1>
-        <p className="animate-up text-2xl md:text-3xl mb-10 text-primary-mustard font-medium">
+        <p className="animate-up text-xl sm:text-2xl md:text-3xl mb-8 sm:mb-10 text-primary-mustard font-medium">
           Fresh Bakes &bull; Happy Days
         </p>
-        <div className="animate-up mt-4">
+        <div className="animate-up mt-2 sm:mt-4">
           <Link 
             href="/menu" 
-            className="inline-block bg-primary-teal text-secondary-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl"
+            className="inline-block bg-primary-teal text-secondary-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl"
           >
             View Menu
           </Link>

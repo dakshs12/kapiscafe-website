@@ -1,12 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'The Seasons';
+  src: url('/fonts/TheSeasons-Regular.woff2') format('woff2'),
+       url('/fonts/TheSeasons-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-primary-teal: #26BCB8;
   --color-primary-mustard: #CE9E1D;
   --color-secondary-white: #FDFFFC;
   --color-secondary-brown: #362417;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-josefin-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "The Seasons", ui-serif, Georgia, serif;
 }
 
 body {
@@ -17,4 +26,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

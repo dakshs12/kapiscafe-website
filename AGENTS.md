@@ -5,6 +5,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 <!-- END:nextjs-agent-rules -->
 
 # Typography & Styling
-- Headings must use **Playfair Display**.
-- Body text must use **DM Sans**.
+- Headings must use **The Seasons**.
+- Body text must use **Josefin Sans**.
 - Feel free to decide where to use bold, styled italics, or underlining.

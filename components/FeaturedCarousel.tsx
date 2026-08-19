@@ -13,27 +13,27 @@ if (typeof window !== "undefined") {
 const items = [
   {
     id: 1,
-    title: "Artisan Sourdough",
-    description: "Perfectly crusty on the outside, soft and airy inside. Baked fresh every morning.",
-    image: "/bakery-1.jpg",
+    title: "Customised Cakes",
+    description: "Bespoke handcrafted cakes made to celebrate your sweetest moments and special occasions.",
+    image: "/cakes.jpg",
   },
   {
     id: 2,
-    title: "Signature Croissants",
-    description: "Flaky, buttery, and melt-in-your-mouth delicious. A true French classic.",
-    image: "/bakery-2.jpg",
+    title: "Chocolaty Brownies",
+    description: "Fudgy, rich, and loaded with premium chocolate for an intensely decadent treat.",
+    image: "/brownie.jpeg",
   },
   {
     id: 3,
-    title: "Seasonal Fruit Tarts",
-    description: "Crisp pastry shells filled with rich custard and topped with fresh seasonal fruits.",
-    image: "/bakery-3.jpg",
+    title: "Signature Cookies",
+    description: "Freshly baked with pure butter, rich aroma, and the perfect melt-in-your-mouth crunch.",
+    image: "/cookies.jpg",
   },
   {
     id: 4,
-    title: "Decadent Chocolate Cake",
-    description: "Rich, moist chocolate layers smothered in velvety ganache.",
-    image: "/bakery-4.jpg",
+    title: "Gift Hampers",
+    description: "Thoughtfully curated hampers overflowing with gourmet baked delights, perfect for gifting.",
+    image: "/gifthamper.jpg",
   },
 ];
 
@@ -50,22 +50,16 @@ export default function FeaturedCarousel() {
       const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
       if (!wrapperRef.current || cards.length === 0) return;
 
-      // Calculate how far to scroll the container leftwards
-      const getScrollAmount = () => {
-        let wrapperWidth = wrapperRef.current!.scrollWidth;
-        return -(wrapperWidth - window.innerWidth);
-      };
-
       const tween = gsap.to(wrapperRef.current, {
-        x: getScrollAmount,
+        x: () => -(wrapperRef.current!.scrollWidth - document.documentElement.clientWidth),
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: () => `+=${wrapperRef.current!.scrollWidth - window.innerWidth}`,
+          end: () => `+=${wrapperRef.current!.scrollWidth}`,
           pin: true,
           scrub: 1,
-          invalidateOnRefresh: true, // Recalculate values if window resizes
+          invalidateOnRefresh: true,
         }
       });
       
@@ -97,47 +91,50 @@ export default function FeaturedCarousel() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-secondary-white py-16 md:py-0 w-full overflow-hidden">
-      <div className="md:h-screen flex flex-col md:justify-center relative">
-        
-        {/* Title for the section */}
-        <div className="px-6 md:px-12 mb-10 md:mb-0 max-w-7xl mx-auto w-full md:absolute md:top-16 md:left-0 z-10 pointer-events-none">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
-            Our Specialties
-          </h2>
-        </div>
+    <div className="block w-full overflow-visible">
+      <section ref={containerRef} className="bg-secondary-white py-16 md:py-0 w-full overflow-hidden">
+        <div className="md:min-h-screen flex flex-col pt-32 md:pt-40 pb-16 relative">
+          
+          {/* Title for the section */}
+          <div className="px-6 md:px-12 md:pl-12 mb-10 md:mb-16 w-full z-10 pointer-events-none">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
+              Our Specialties
+            </h2>
+          </div>
 
-        {/* Carousel Wrapper */}
-        <div 
-          ref={wrapperRef} 
-          className="flex flex-col md:flex-row gap-12 md:gap-16 px-6 md:px-12 md:pl-12 w-full md:w-max md:mt-24 md:items-center"
-        >
-          {items.map((item) => (
-            <div 
-              key={item.id} 
-              className="feature-card flex flex-col w-full md:w-[50vw] lg:w-[40vw] flex-shrink-0"
-            >
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6 bg-secondary-brown/10">
-                <Image 
-                  src={item.image} 
-                  alt={item.title} 
-                  fill
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
+          {/* Carousel Wrapper */}
+          <div 
+            ref={wrapperRef} 
+            className="flex flex-col md:flex-row gap-12 md:gap-16 px-6 md:px-12 md:pl-12 w-full md:w-max md:items-start"
+            style={{ width: "max-content" }}
+          >
+            {items.map((item) => (
+              <div 
+                key={item.id} 
+                className="feature-card flex flex-col w-full md:w-[50vw] lg:w-[40vw] flex-shrink-0"
+              >
+                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6 bg-secondary-brown/10">
+                  <Image 
+                    src={item.image} 
+                    alt={item.title} 
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold font-serif text-secondary-brown mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-base md:text-lg text-secondary-brown/80 font-sans leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold font-serif text-secondary-brown mb-3">
-                {item.title}
-              </h3>
-              <p className="text-base md:text-lg text-secondary-brown/80 font-sans leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          ))}
-          {/* Add a spacer pad for desktop horizontal scroll to finish cleanly */}
-          <div className="hidden md:block w-[10vw] flex-shrink-0" />
+            ))}
+            {/* Add a spacer pad for desktop horizontal scroll to finish cleanly */}
+            <div className="hidden md:block w-[20vw] flex-shrink-0" />
+          </div>
+          
         </div>
-        
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

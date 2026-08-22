@@ -14,11 +14,11 @@ export default function InteractiveCakeHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   
-  const frameCount = 175;
+  const frameCount = 87;
   const currentFrame = (index: number) => {
-    // ezgif-frame-001.jpg through 175
-    const paddedIndex = (index + 1).toString().padStart(3, '0');
-    return `/cake-sequence/ezgif-frame-${paddedIndex}.jpg`;
+    // frame_000034.webp through frame_000120.webp
+    const paddedIndex = (index + 34).toString().padStart(6, '0');
+    return `/cake-sequence/frame_${paddedIndex}.webp`;
   };
 
   useGSAP(() => {
@@ -56,56 +56,48 @@ export default function InteractiveCakeHero() {
       }
     }
 
-    // Set up the ScrollTrigger timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=300%", // The user will scroll for 300% of the viewport height to complete the animation
+        end: "bottom top", // Timeline runs for the full duration the wrapper is on screen
         scrub: 0.5,
-        pin: true,
+        invalidateOnRefresh: true,
       }
     });
 
-    // Animate the frames
+    // Animate the frames smoothly across the full scroll distance
     tl.to(cakeSeq, {
       frame: frameCount - 1,
       snap: "frame",
+      duration: 1, 
       ease: "none",
       onUpdate: render,
-    }, 0);
-
-    // Fade out text early in the scroll sequence
-    tl.to(textRef.current, {
-      opacity: 0,
-      y: -100,
-      duration: 0.2, // Since it's a timeline tied to scroll, this represents 20% of the scroll progress
-      ease: "power2.out"
     }, 0);
 
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-[var(--color-secondary-brown)] overflow-hidden">
-      {/* 
-        The canvas uses object-cover to seamlessly scale and crop the sequence 
-        images exactly like background-size: cover, ensuring full responsiveness 
-        on mobile and desktop without complex JS resize logic.
-      */}
-      <canvas 
-        ref={canvasRef} 
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      />
-      <div 
-        ref={textRef} 
-        className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-6 pointer-events-none"
-      >
-        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-secondary-white font-serif drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tight">
-          Kapi's Bakehouse
-        </h1>
-        <p className="mt-4 sm:mt-6 text-xl sm:text-2xl md:text-3xl text-primary-mustard font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-          Fresh Bakes &bull; Happy Days
-        </p>
+    // Outer container defines the total scroll distance. 
+    // 125vh means it pins for 25vh (reaching ~frame 50) and then scrolls up for 100vh.
+    <div ref={containerRef} className="relative w-full bg-[var(--color-secondary-brown)]" style={{ height: "125vh" }}>
+      {/* Inner sticky container pins natively until the wrapper bottom pushes it up */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
+        <canvas 
+          ref={canvasRef} 
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <div 
+          ref={textRef} 
+          className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-6 pointer-events-none"
+        >
+          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-secondary-white font-serif drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tight">
+            Kapi's Bakehouse
+          </h1>
+          <p className="mt-4 sm:mt-6 text-xl sm:text-2xl md:text-3xl text-primary-mustard font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+            Fresh Bakes &bull; Happy Days
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -96,7 +96,7 @@ export default function FeaturedCarousel() {
         <div className="md:min-h-screen flex flex-col pt-32 md:pt-40 pb-16 relative">
           
           {/* Title for the section */}
-          <div className="px-6 md:px-12 md:pl-12 mb-10 md:mb-16 w-full z-10 pointer-events-none">
+          <div className="px-6 md:px-12 md:pl-12 mb-10 md:mb-12 w-full z-10 pointer-events-none">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
               Our Specialties
             </h2>
@@ -130,7 +130,7 @@ export default function FeaturedCarousel() {
               </div>
             ))}
             {/* Add a spacer pad for desktop horizontal scroll to finish cleanly */}
-            <div className="hidden md:block w-[20vw] flex-shrink-0" />
+            <div className="hidden md:block w-[5vw] flex-shrink-0" />
           </div>
           
         </div>

@@ -60,8 +60,8 @@ export default function LocationInfo() {
               Our Bakery
             </h3>
             <p className="text-xl leading-relaxed">
-              123 Bakery Lane, Scheme No 54<br/>
-              Indore, Madhya Pradesh 452010
+              112, Medicaps Business Park, Mhow-Neemuch Road,<br />
+              Pithampur, Madhya Pradesh, 454775
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function LocationInfo() {
               Opening Hours
             </h3>
             <p className="text-xl leading-relaxed">
-              Monday &ndash; Sunday<br/>
+              Monday &ndash; Sunday<br />
               8:00 AM &ndash; 10:00 PM
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function LocationInfo() {
               Get in Touch
             </h3>
             <p className="text-xl leading-relaxed">
-              +91 98765 43210<br/>
+              +91 98765 43210<br />
               hello@kapisbakehouse.com
             </p>
           </div>
@@ -92,11 +92,11 @@ export default function LocationInfo() {
       {/* Right Column */}
       <div ref={rightColRef} className="w-full h-[400px] md:h-auto min-h-[500px] p-2 sm:p-4 md:p-8">
         <div className="w-full h-full relative rounded-3xl overflow-hidden shadow-xl border-4 border-white/50">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117763.55657388916!2d75.78772391035654!3d22.724128405021203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcad1b410ddb%3A0x96ec4da356240f4!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-            className="absolute top-0 left-0 w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
-            allowFullScreen={false} 
-            loading="lazy" 
+          <iframe
+            src="https://www.google.com/maps?q=112,+Medicaps+Business+Park,+Mhow-Neemuch+Road,+Pithampur&output=embed"
+            className="absolute top-0 left-0 w-full h-full border-0 transition-all duration-700"
+            allowFullScreen={false}
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>

@@ -57,19 +57,20 @@ export default function MenuCTA() {
 
   return (
     <section ref={containerRef} className="py-10 px-4 md:py-16 md:px-8 bg-secondary-white overflow-hidden flex justify-center">
-      <div 
-        ref={cardRef} 
+      <div
+        ref={cardRef}
         className="w-full max-w-5xl bg-secondary-brown rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative"
       >
         {/* Decorative background element */}
         <div className="absolute top-0 right-0 w-48 h-48 bg-primary-mustard/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        
+
         {/* Left Side: Image */}
         <div className="w-full md:w-5/12 relative h-56 md:h-auto min-h-[250px]">
-          <Image 
-            src="/cakes.jpg" 
-            alt="Delicious baked goods" 
+          <Image
+            src="/menucta.jpeg"
+            alt="Delicious baked goods"
             fill
+            sizes="(max-width: 768px) 100vw, 42vw"
             className="object-cover"
           />
           {/* Gradient overlay to blend with the dark background */}
@@ -80,14 +81,14 @@ export default function MenuCTA() {
         <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center relative z-10">
           <div ref={contentRef} className="flex flex-col items-start space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-secondary-white leading-tight">
-              Craving Something <br/><span className="text-primary-mustard italic">Delicious?</span>
+              Craving Something <br /><span className="text-primary-mustard italic">Delicious?</span>
             </h2>
             <p className="text-sm md:text-base text-secondary-white/80 font-sans leading-relaxed max-w-sm">
               Explore our wide range of freshly baked breads, custom cakes, and artisanal savouries made to perfection.
             </p>
             <div className="pt-2">
-              <Link 
-                href="/menu" 
+              <Link
+                href="/menu"
                 className="group inline-flex items-center px-6 py-3 bg-primary-mustard text-secondary-brown font-sans font-bold text-base rounded-full transition-all duration-300 hover:bg-secondary-white hover:scale-105 shadow-md hover:shadow-lg"
               >
                 <span>Explore Full Menu</span>

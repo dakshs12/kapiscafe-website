@@ -33,12 +33,14 @@ export default function Navbar() {
   return (
     <>
       <nav 
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        className={`sticky top-0 z-50 w-full relative transition-all duration-300 ${
           isScrolled 
-            ? "bg-secondary-white/90 backdrop-blur-md py-3 shadow-md border-b border-secondary-brown/10" 
+            ? "bg-secondary-white/90 backdrop-blur-md py-3 shadow-md" 
             : "bg-secondary-white py-5"
         }`}
       >
+        {/* Minimal Glowing Brand Line */}
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-primary-mustard shadow-[0_0_6px_0px] shadow-primary-mustard/40"></div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           
           {/* Left: Logo */}
@@ -50,6 +52,7 @@ export default function Navbar() {
               height={50} 
               className="w-28 sm:w-32 md:w-36 h-auto object-contain scale-[1.35] origin-left"
               priority
+              loading="eager"
             />
           </Link>
 
@@ -61,7 +64,7 @@ export default function Navbar() {
                 <Link 
                   key={link.name} 
                   href={link.href} 
-                  className={`relative font-semibold text-lg tracking-wide transition-colors group flex justify-center ${
+                  className={`relative font-semibold text-xl tracking-wide transition-colors group flex justify-center ${
                     isActive ? "text-primary-teal" : "text-secondary-brown hover:text-primary-teal"
                   }`}
                 >
@@ -82,7 +85,7 @@ export default function Navbar() {
           <div className="flex items-center gap-6 z-50 relative">
             <Link 
               href="/menu" 
-              className="hidden sm:flex items-center justify-center px-6 py-2.5 bg-primary-mustard text-secondary-white font-semibold text-sm rounded-full shadow-lg shadow-primary-mustard/20 hover:shadow-xl hover:scale-105 hover:-translate-y-0.5 transition-all duration-300"
+              className="hidden sm:flex items-center justify-center px-6 py-2.5 bg-primary-mustard text-secondary-white font-semibold text-base rounded-full shadow-lg shadow-primary-mustard/20 hover:shadow-xl hover:scale-105 hover:-translate-y-0.5 transition-all duration-300"
             >
               Order Online
             </Link>

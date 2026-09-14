@@ -83,6 +83,7 @@ export default function OurStory() {
             src="/storefront.jpg" 
             alt="Kapi's Bakehouse Storefront" 
             fill 
+            sizes="(max-width: 1024px) 90vw, 45vw"
             className="object-cover"
           />
         </div>

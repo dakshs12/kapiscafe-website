@@ -82,8 +82,9 @@ export default function LocationInfo() {
               Get in Touch
             </h3>
             <p className="text-xl leading-relaxed">
-              +91 98765 43210<br />
-              hello@kapisbakehouse.com
+              +91 91099 91600<br />
+              +91 91099 91601<br />
+              kitchen@kapisbakehouse.com
             </p>
           </div>
         </div>

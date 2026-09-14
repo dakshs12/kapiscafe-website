@@ -64,10 +64,11 @@ export default function Footer() {
               </a>
             </p>
             <p>
-              <a href="mailto:hello@kapisbakehouse.com" className="hover:text-primary-mustard transition-colors duration-300">hello@kapisbakehouse.com</a>
+              <a href="mailto:kitchen@kapisbakehouse.com" className="hover:text-primary-mustard transition-colors duration-300">kitchen@kapisbakehouse.com</a>
             </p>
-            <p>
-              <a href="tel:+919876543210" className="hover:text-primary-mustard transition-colors duration-300">+91 98765 43210</a>
+            <p className="flex flex-col space-y-1">
+              <a href="tel:+919109991600" className="hover:text-primary-mustard transition-colors duration-300">+91 91099 91600</a>
+              <a href="tel:+919109991601" className="hover:text-primary-mustard transition-colors duration-300">+91 91099 91601</a>
             </p>
           </div>
         </div>

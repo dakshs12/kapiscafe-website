@@ -89,12 +89,12 @@ export default function InteractiveCakeHero() {
         />
         <div 
           ref={textRef} 
-          className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-6 pointer-events-none"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 p-4 sm:p-6 pointer-events-none"
         >
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-secondary-white font-serif drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tight">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-secondary-white font-serif drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tight">
             Kapi's Bakehouse
           </h1>
-          <p className="mt-4 sm:mt-6 text-xl sm:text-2xl md:text-3xl text-primary-mustard font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+          <p className="mt-3 sm:mt-5 text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary-mustard font-medium drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
             Fresh Bakes &bull; Happy Days
           </p>
         </div>

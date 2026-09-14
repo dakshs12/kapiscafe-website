@@ -35,36 +35,36 @@ export default function Navbar() {
       <nav 
         className={`sticky top-0 z-50 w-full relative transition-all duration-300 ${
           isScrolled 
-            ? "bg-secondary-white/90 backdrop-blur-md py-3 shadow-md" 
-            : "bg-secondary-white py-5"
+            ? "bg-secondary-white/90 backdrop-blur-md py-2.5 sm:py-3 shadow-md" 
+            : "bg-secondary-white py-3 sm:py-3.5 md:py-4"
         }`}
       >
         {/* Minimal Glowing Brand Line */}
         <div className="absolute bottom-0 left-0 w-full h-[1px] bg-primary-mustard shadow-[0_0_6px_0px] shadow-primary-mustard/40"></div>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between">
           
           {/* Left: Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity z-50 relative">
             <Image 
               src="/kapis-logo.svg" 
               alt="Kapi's Bakehouse" 
-              width={140} 
-              height={50} 
-              className="w-28 sm:w-32 md:w-36 h-auto object-contain scale-[1.35] origin-left"
+              width={130} 
+              height={46} 
+              className="w-28 sm:w-32 md:w-36 h-auto object-contain"
               priority
               loading="eager"
             />
           </Link>
 
           {/* Center: Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-12">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-10">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link 
                   key={link.name} 
                   href={link.href} 
-                  className={`relative font-semibold text-xl tracking-wide transition-colors group flex justify-center ${
+                  className={`relative font-semibold text-sm lg:text-base tracking-wide transition-colors group flex justify-center ${
                     isActive ? "text-primary-teal" : "text-secondary-brown hover:text-primary-teal"
                   }`}
                 >
@@ -72,7 +72,7 @@ export default function Navbar() {
                   
                   {/* Animated Underline */}
                   <span 
-                    className={`absolute -bottom-1.5 left-0 h-[2px] bg-primary-teal transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-primary-teal transition-all duration-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   ></span>
@@ -82,10 +82,10 @@ export default function Navbar() {
           </div>
 
           {/* Right: CTA & Mobile Toggle */}
-          <div className="flex items-center gap-6 z-50 relative">
+          <div className="flex items-center gap-4 sm:gap-6 z-50 relative">
             <Link 
               href="/menu" 
-              className="hidden sm:flex items-center justify-center px-6 py-2.5 bg-primary-mustard text-secondary-white font-semibold text-base rounded-full shadow-lg shadow-primary-mustard/20 hover:shadow-xl hover:scale-105 hover:-translate-y-0.5 transition-all duration-300"
+              className="hidden sm:flex items-center justify-center px-5 py-2 bg-primary-mustard text-secondary-white font-semibold text-sm sm:text-base rounded-full shadow-md shadow-primary-mustard/20 hover:shadow-lg hover:scale-105 hover:-translate-y-0.5 transition-all duration-300"
             >
               Order Online
             </Link>

@@ -80,16 +80,16 @@ export default function MenuCTA() {
         {/* Right Side: Content */}
         <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center relative z-10">
           <div ref={contentRef} className="flex flex-col items-start space-y-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-secondary-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-secondary-white leading-tight">
               Craving Something <br /><span className="text-primary-mustard italic">Delicious?</span>
             </h2>
-            <p className="text-sm md:text-base text-secondary-white/80 font-sans leading-relaxed max-w-sm">
+            <p className="text-sm sm:text-base md:text-lg text-secondary-white/80 font-sans leading-relaxed max-w-md">
               Explore our wide range of freshly baked breads, custom cakes, and artisanal savouries made to perfection.
             </p>
             <div className="pt-2">
               <Link
                 href="/menu"
-                className="group inline-flex items-center px-6 py-3 bg-primary-mustard text-secondary-brown font-sans font-bold text-base rounded-full transition-all duration-300 hover:bg-secondary-white hover:scale-105 shadow-md hover:shadow-lg"
+                className="group inline-flex items-center px-5 py-2.5 sm:px-6 sm:py-3 bg-primary-mustard text-secondary-brown font-sans font-bold text-sm sm:text-base rounded-full transition-all duration-300 hover:bg-secondary-white hover:scale-105 shadow-md hover:shadow-lg"
               >
                 <span>Explore Full Menu</span>
                 <svg className="w-4 h-4 ml-2 -mr-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

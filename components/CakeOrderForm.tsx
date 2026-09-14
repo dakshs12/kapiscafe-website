@@ -130,19 +130,19 @@ export default function CakeOrderForm() {
         <input type="hidden" name="occasion" value={occasion} />
 
         {/* 2-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-start">
 
           {/* LEFT COLUMN: Configurator (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-8">
+          <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8">
 
             {/* SECTION 1: Occasion & Date */}
-            <div className="cake-form-section bg-white rounded-3xl p-6 sm:p-8 border border-primary-mustard/20 shadow-sm">
-              <div className="flex items-center gap-3 pb-4 mb-6 border-b border-secondary-brown/10">
+            <div className="cake-form-section bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border border-primary-mustard/20 shadow-sm">
+              <div className="flex items-center gap-3 pb-3.5 mb-5 border-b border-secondary-brown/10">
                 <span className="w-8 h-8 rounded-full bg-primary-mustard/15 text-primary-mustard font-bold text-sm flex items-center justify-center font-sans">
                   01
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl sm:text-2xl text-secondary-brown font-bold tracking-wide">
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-secondary-brown font-bold tracking-wide">
                     Occasion & Date
                   </h3>
                   <p className="text-xs sm:text-sm text-secondary-brown/70 font-sans">
@@ -234,13 +234,13 @@ export default function CakeOrderForm() {
             </div>
 
             {/* SECTION 2: Cake Size & Tiers */}
-            <div className="cake-form-section bg-white rounded-3xl p-6 sm:p-8 border border-primary-mustard/20 shadow-sm">
-              <div className="flex items-center gap-3 pb-4 mb-6 border-b border-secondary-brown/10">
+            <div className="cake-form-section bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border border-primary-mustard/20 shadow-sm">
+              <div className="flex items-center gap-3 pb-3.5 mb-5 border-b border-secondary-brown/10">
                 <span className="w-8 h-8 rounded-full bg-primary-mustard/15 text-primary-mustard font-bold text-sm flex items-center justify-center font-sans">
                   02
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl sm:text-2xl text-secondary-brown font-bold tracking-wide">
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-secondary-brown font-bold tracking-wide">
                     Cake Size & Tiers
                   </h3>
                   <p className="text-xs sm:text-sm text-secondary-brown/70 font-sans">
@@ -318,13 +318,13 @@ export default function CakeOrderForm() {
             </div>
 
             {/* SECTION 3: Cake Flavour */}
-            <div className="cake-form-section bg-white rounded-3xl p-6 sm:p-8 border border-primary-mustard/20 shadow-sm">
-              <div className="flex items-center gap-3 pb-4 mb-6 border-b border-secondary-brown/10">
+            <div className="cake-form-section bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border border-primary-mustard/20 shadow-sm">
+              <div className="flex items-center gap-3 pb-3.5 mb-5 border-b border-secondary-brown/10">
                 <span className="w-8 h-8 rounded-full bg-primary-mustard/15 text-primary-mustard font-bold text-sm flex items-center justify-center font-sans">
                   03
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl sm:text-2xl text-secondary-brown font-bold tracking-wide">
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-secondary-brown font-bold tracking-wide">
                     Cake Flavour
                   </h3>
                   <p className="text-xs sm:text-sm text-secondary-brown/70 font-sans">
@@ -386,13 +386,13 @@ export default function CakeOrderForm() {
             </div>
 
             {/* SECTION 4: Design & Personal Message */}
-            <div className="cake-form-section bg-white rounded-3xl p-6 sm:p-8 border border-primary-mustard/20 shadow-sm font-sans">
-              <div className="flex items-center gap-3 pb-4 mb-6 border-b border-secondary-brown/10">
+            <div className="cake-form-section bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border border-primary-mustard/20 shadow-sm font-sans">
+              <div className="flex items-center gap-3 pb-3.5 mb-5 border-b border-secondary-brown/10">
                 <span className="w-8 h-8 rounded-full bg-primary-mustard/15 text-primary-mustard font-bold text-sm flex items-center justify-center">
                   04
                 </span>
                 <div>
-                  <h3 className="font-serif text-xl sm:text-2xl text-secondary-brown font-bold tracking-wide">
+                  <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-secondary-brown font-bold tracking-wide">
                     Design & Personal Message
                   </h3>
                   <p className="text-xs sm:text-sm text-secondary-brown/70">
@@ -441,20 +441,20 @@ export default function CakeOrderForm() {
           </div>
 
           {/* RIGHT COLUMN: Sticky Cake Summary (5 Cols) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <div className="summary-card bg-white rounded-3xl p-6 sm:p-8 border-2 border-primary-mustard/30 shadow-xl overflow-hidden relative">
+          <div className="lg:col-span-5 lg:sticky lg:top-20">
+            <div className="summary-card bg-white rounded-3xl p-5 sm:p-6 lg:p-7 border-2 border-primary-mustard/30 shadow-xl overflow-hidden relative">
 
               {/* Subtle Watermark Ornament */}
               <div className="absolute top-0 right-0 transform translate-x-4 -translate-y-4 w-28 h-28 bg-primary-mustard/5 rounded-full pointer-events-none"></div>
 
               {/* Summary Header */}
-              <div className="border-b border-secondary-brown/10 pb-5 mb-6">
+              <div className="border-b border-secondary-brown/10 pb-4 mb-5">
                 <div className="mb-2">
                   <span className="text-[11px] uppercase tracking-widest font-bold px-3 py-1 rounded-full bg-primary-mustard/15 text-primary-mustard font-sans">
                     Summary
                   </span>
                 </div>
-                <h3 className="font-serif text-2xl sm:text-3xl text-primary-mustard font-bold">
+                <h3 className="font-serif text-xl sm:text-2xl text-primary-mustard font-bold">
                   Your Cake Summary
                 </h3>
                 <p className="text-xs text-secondary-brown/70 font-sans mt-1">
@@ -573,7 +573,7 @@ export default function CakeOrderForm() {
         </div>
 
         {/* BAKEHOUSE NOTICE BANNER */}
-        <div className="cake-form-section mt-12 sm:mt-16 bg-[#FDFBF7] border border-primary-mustard/30 rounded-3xl p-6 sm:p-8 shadow-sm font-sans">
+        <div className="cake-form-section mt-8 sm:mt-12 bg-[#FDFBF7] border border-primary-mustard/30 rounded-3xl p-5 sm:p-6 lg:p-7 shadow-sm font-sans">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-primary-mustard/15 text-primary-mustard flex items-center justify-center flex-shrink-0">
               <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">

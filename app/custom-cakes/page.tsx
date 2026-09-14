@@ -52,18 +52,18 @@ export default function CustomCakesPage() {
       className="min-h-screen bg-secondary-white text-secondary-brown relative"
     >
       {/* Container with responsive padding */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 flex flex-col gap-10 sm:gap-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12 lg:py-14 flex flex-col gap-8 sm:gap-10">
         
         {/* HERO SECTION */}
         <section className="text-center max-w-4xl mx-auto flex flex-col items-center">
           
           {/* Hero Title in The Seasons */}
-          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-secondary-brown tracking-tight leading-tight mb-4">
+          <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary-brown tracking-tight leading-tight mb-3 sm:mb-4">
             Custom Cakes
           </h1>
 
           {/* Tagline in primary-mustard */}
-          <p className="hero-tagline text-lg sm:text-xl md:text-2xl text-primary-mustard font-sans font-medium max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10">
+          <p className="hero-tagline text-base sm:text-lg md:text-xl text-primary-mustard font-sans font-medium max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8">
             Freshly baked custom cakes made for your special celebrations and milestones
           </p>
 

@@ -63,21 +63,21 @@ export default function OurStory() {
   };
 
   return (
-    <section ref={containerRef} className="pt-20 pb-24 px-6 md:px-12 md:pl-12 border-t border-primary-mustard/20 bg-secondary-white overflow-hidden">
+    <section ref={containerRef} className="pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 px-6 md:px-12 border-t border-primary-mustard/20 bg-secondary-white overflow-hidden">
       
       {/* Section Heading */}
-      <div className="mb-8 md:mb-14 w-full z-10 pointer-events-none">
-        <h2 ref={sectionHeadingRef} className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
+      <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-14 w-full z-10 pointer-events-none">
+        <h2 ref={sectionHeadingRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
           Our Story
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-20 items-start w-full">
         
         {/* Left Column: Image */}
         <div 
           ref={imageRef} 
-          className="relative w-11/12 aspect-[4/5] lg:aspect-square rounded-[2rem] overflow-hidden shadow-2xl"
+          className="relative w-full max-w-[540px] aspect-[4/5] sm:aspect-square lg:aspect-square rounded-[2rem] overflow-hidden shadow-2xl mx-auto lg:mx-0"
         >
           <Image 
             src="/storefront.jpg" 
@@ -89,15 +89,15 @@ export default function OurStory() {
         </div>
 
         {/* Right Column: Story Content */}
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-6 sm:space-y-8">
           <h2 
             ref={headingRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary-mustard leading-[1.15]"
+            className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-serif font-bold text-primary-mustard leading-[1.15]"
           >
             Born in Pithampur. Made with love. Baked fresh.
           </h2>
           
-          <div className="space-y-6 text-base md:text-lg text-secondary-brown font-sans leading-relaxed">
+          <div className="space-y-4 sm:space-y-6 text-sm sm:text-base md:text-lg text-secondary-brown font-sans leading-relaxed">
             <p ref={addToRefs}>
               Welcome to Kapi’s Bakehouse, Pithampur’s first bakery built with a simple wish, to bring something fresh, honest and truly enjoyable to our city.
             </p>

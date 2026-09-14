@@ -93,11 +93,11 @@ export default function FeaturedCarousel() {
   return (
     <div className="block w-full overflow-visible">
       <section ref={containerRef} className="bg-secondary-white py-16 md:py-0 w-full overflow-hidden">
-        <div className="md:min-h-screen flex flex-col pt-32 md:pt-40 pb-16 relative">
+        <div className="md:min-h-screen flex flex-col pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-8 sm:pb-12 relative">
           
           {/* Title for the section */}
-          <div className="px-6 md:px-12 md:pl-12 mb-10 md:mb-12 w-full z-10 pointer-events-none">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
+          <div className="px-6 md:px-12 md:pl-16 mb-6 sm:mb-8 md:mb-10 w-full z-10 pointer-events-none">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-secondary-brown">
               Our Specialties
             </h2>
           </div>
@@ -105,15 +105,15 @@ export default function FeaturedCarousel() {
           {/* Carousel Wrapper */}
           <div 
             ref={wrapperRef} 
-            className="flex flex-col md:flex-row gap-12 md:gap-16 px-6 md:px-12 md:pl-12 w-full md:w-max md:items-start"
+            className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 px-6 md:px-12 md:pl-16 w-full md:w-max md:items-start"
             style={{ width: "max-content" }}
           >
             {items.map((item) => (
               <div 
                 key={item.id} 
-                className="feature-card flex flex-col w-full md:w-[50vw] lg:w-[40vw] flex-shrink-0"
+                className="feature-card flex flex-col w-full md:w-[48vw] lg:w-[40vw] xl:w-[36vw] 2xl:w-[32vw] flex-shrink-0"
               >
-                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg mb-6 bg-secondary-brown/10">
+                <div className="relative w-full aspect-[4/3] max-h-[min(42vh,380px)] rounded-2xl overflow-hidden shadow-xl mb-4 sm:mb-5 bg-secondary-brown/10">
                   <Image 
                     src={item.image} 
                     alt={item.title} 
@@ -122,16 +122,16 @@ export default function FeaturedCarousel() {
                     className="object-cover transition-transform duration-700 hover:scale-105"
                   />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold font-serif text-secondary-brown mb-3">
+                <h3 className="text-2xl md:text-3xl font-bold font-serif text-secondary-brown mb-2 sm:mb-3">
                   {item.title}
                 </h3>
-                <p className="text-base md:text-lg text-secondary-brown/80 font-sans leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-secondary-brown/80 font-sans leading-relaxed">
                   {item.description}
                 </p>
               </div>
             ))}
             {/* Add a spacer pad for desktop horizontal scroll to finish cleanly */}
-            <div className="hidden md:block w-[5vw] flex-shrink-0" />
+            <div className="hidden md:block w-[10vw] flex-shrink-0" />
           </div>
           
         </div>

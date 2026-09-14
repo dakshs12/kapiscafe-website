@@ -77,13 +77,13 @@ export default function MenuPage() {
   return (
     <div className="flex flex-col flex-1 bg-secondary-white">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center py-10 md:py-16 px-4 sm:px-6 relative">
+      <section className="flex flex-col items-center justify-center py-8 sm:py-10 md:py-12 px-4 sm:px-6 relative">
         <div className="z-10 text-center flex flex-col items-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-[#362417] mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-[#362417] mb-3 sm:mb-4">
             Our Menu
           </h1>
-          <div className="w-16 h-1 bg-[#CE9E1D] rounded-full mb-6"></div>
-          <p className="text-base sm:text-lg md:text-xl text-[#362417]/80 font-sans max-w-2xl mx-auto px-4">
+          <div className="w-16 h-1 bg-[#CE9E1D] rounded-full mb-4 sm:mb-6"></div>
+          <p className="text-sm sm:text-base md:text-lg text-[#362417]/80 font-sans max-w-2xl mx-auto px-4">
             Discover our delicious range of freshly baked goods, made with love every single day.
           </p>
         </div>
@@ -93,13 +93,13 @@ export default function MenuPage() {
       <section className="pb-16 px-4 sm:px-6 md:px-12 max-w-6xl mx-auto w-full relative">
         
         {/* Sticky Tab Navigation */}
-        <div className="sticky top-[68px] lg:top-[88px] z-40 bg-secondary-white/95 backdrop-blur-md pt-4 pb-4 mb-10 -mx-4 px-4 md:mx-0 md:px-0 border-b border-stone-200">
-          <div className="flex overflow-x-auto hide-scrollbar items-center justify-start md:justify-center gap-3 sm:gap-4">
+        <div className="sticky top-[58px] sm:top-[62px] md:top-[66px] z-40 bg-secondary-white/95 backdrop-blur-md pt-3 pb-3 sm:pt-4 sm:pb-4 mb-8 sm:mb-10 -mx-4 px-4 md:mx-0 md:px-0 border-b border-stone-200">
+          <div className="flex overflow-x-auto hide-scrollbar items-center justify-start md:justify-center gap-2.5 sm:gap-4">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleFilter(cat)}
-                className={`flex-shrink-0 whitespace-nowrap px-6 py-2.5 rounded-full font-bold text-sm sm:text-base font-sans transition-all duration-300 cursor-pointer ${
+                className={`flex-shrink-0 whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm md:text-base font-sans transition-all duration-300 cursor-pointer ${
                   activeCategory === cat 
                     ? "bg-[#26BCB8] text-white shadow-md" 
                     : "bg-transparent border border-stone-300 text-stone-500 hover:bg-stone-100 hover:text-[#362417]"

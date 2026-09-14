@@ -13,6 +13,14 @@ const josefinSans = Josefin_Sans({
 export const metadata: Metadata = {
   title: "Kapi's Bakehouse",
   description: "Artisan baked goods by Kapi's Bakehouse",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

@@ -422,7 +422,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-46",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Kulcha",
         "description": "",
         "price": "₹35"
@@ -431,7 +431,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-47",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Milk Bread",
         "description": "",
         "price": "₹40"
@@ -440,7 +440,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-48",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Jumbo Bread",
         "description": "6 slices",
         "price": "₹40"
@@ -449,7 +449,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-49",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Brown Bread",
         "description": "",
         "price": "₹50"
@@ -458,7 +458,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-50",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "100% Atta Bread",
         "description": "",
         "price": "₹50"
@@ -467,7 +467,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-51",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Family Bread",
         "description": "",
         "price": "₹50"
@@ -476,7 +476,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-52",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Multigrain Bread",
         "description": "",
         "price": "₹55"
@@ -485,7 +485,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-53",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Jumbo Bread",
         "description": "full",
         "price": "₹180"
@@ -494,7 +494,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-54",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Garlic Loaf",
         "description": "",
         "price": "₹40"
@@ -503,7 +503,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-55",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Garlic Bread Round",
         "description": "",
         "price": "₹45"
@@ -512,7 +512,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-56",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Fruit Bread Round",
         "description": "",
         "price": "₹50"
@@ -521,7 +521,7 @@ export async function getMenuItems(): Promise<MenuItem[]> {
         "_uid": "item-57",
         "component": "menuItem",
         "category": "Breads & Buns",
-        "subCategory": "Bread & Buns",
+        "subCategory": "Breads",
         "title": "Focaccia",
         "description": "",
         "price": "₹60"

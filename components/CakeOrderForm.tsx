@@ -29,15 +29,7 @@ export default function CakeOrderForm() {
     setMinDate(`${yyyy}-${mm}-${dd}`);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    if (flavour === "Custom Flavour" && customFlavour.trim()) {
-      formData.set("flavour", `Custom: ${customFlavour.trim()}`);
-    }
-    await submitCustomCakeOrder(formData);
-    setIsSubmitted(true);
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Helper formatting for summary date
   const formatDisplayDate = (dString: string) => {
@@ -84,38 +76,129 @@ export default function CakeOrderForm() {
         : "Custom Flavour (specify below)"
       : flavour;
 
+  // Build pre-filled WhatsApp message URL
+  const generateWhatsAppUrl = () => {
+    const chosenFlavour =
+      flavour === "Custom Flavour"
+        ? customFlavour.trim() || "Custom Flavour"
+        : flavour;
+    const formattedDate = formatDisplayDate(eventDate);
+    const weightServes = weightOptions.find((w) => w.id === weight)?.serves || "";
+
+    const lines = [
+      "*New Custom Cake Request - Kapi's Bakehouse*",
+      "",
+      "*Customer Details:*",
+      `• Name: ${fullName.trim() || "Not specified"}`,
+      `• Phone: ${phone.trim() || "Not specified"}`,
+      "",
+      "*Cake Specifications:*",
+      `• Structure / Tiers: ${tier}`,
+      `• Weight: ${weight}${weightServes ? ` (${weightServes})` : ""}`,
+      `• Flavour: ${chosenFlavour}`,
+      `• Occasion: ${occasion}`,
+      `• Celebration Date: ${formattedDate}`,
+    ];
+
+    if (topperText.trim()) {
+      lines.push(`• Message on Cake / Topper: "${topperText.trim()}"`);
+    }
+
+    if (notes.trim()) {
+      lines.push("");
+      lines.push("*Design & Colour Notes:*");
+      lines.push(notes.trim());
+    }
+
+    lines.push("");
+    lines.push("_Sent via kapisbakehouse.com_");
+
+    const message = lines.join("\n");
+    return `https://wa.me/919109991600?text=${encodeURIComponent(message)}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const waUrl = generateWhatsAppUrl();
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      if (flavour === "Custom Flavour" && customFlavour.trim()) {
+        formData.set("flavour", `Custom: ${customFlavour.trim()}`);
+      }
+      formData.set("name", fullName);
+      formData.set("date", eventDate);
+      formData.set("topper", topperText);
+      formData.set("notes", notes);
+
+      await submitCustomCakeOrder(formData);
+    } catch (err) {
+      console.error("Error logging cake order:", err);
+    } finally {
+      setIsSubmitting(false);
+      // Attempt to open WhatsApp directly in new window/tab
+      if (typeof window !== "undefined") {
+        window.open(waUrl, "_blank", "noopener,noreferrer");
+      }
+      setIsSubmitted(true);
+    }
+  };
+
   if (isSubmitted) {
+    const waUrl = generateWhatsAppUrl();
     return (
       <div className="max-w-3xl mx-auto my-12 p-8 md:p-14 bg-white rounded-3xl border border-primary-mustard/30 shadow-xl text-center font-sans">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary-teal/10 flex items-center justify-center text-primary-teal">
-          <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#25D366]/15 flex items-center justify-center text-[#25D366]">
+          <svg className="w-10 h-10 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
           </svg>
         </div>
         <span className="inline-block px-4 py-1 rounded-full bg-primary-mustard/15 text-primary-mustard text-xs font-semibold uppercase tracking-widest mb-3">
-          Request Received
+          Order Ready for WhatsApp
         </span>
         <h2 className="text-3xl sm:text-4xl text-secondary-brown font-serif font-bold mb-4">
           Thank you, {fullName || "valued customer"}!
         </h2>
         <p className="text-secondary-brown/80 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-6 font-sans">
-          Your cake request for <strong className="text-secondary-brown">{formatDisplayDate(eventDate)}</strong> has been sent directly to our kitchen team.
+          Your custom cake specifications for <strong className="text-secondary-brown">{formatDisplayDate(eventDate)}</strong> are ready.
         </p>
-        <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-primary-mustard/20 max-w-md mx-auto text-sm text-secondary-brown/90 mb-8 space-y-1">
-          <p className="font-semibold text-primary-mustard flex items-center justify-center gap-2">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+
+        {/* WhatsApp Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-8">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+          >
+            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
             </svg>
-            Next Step: WhatsApp Message
-          </p>
-          <p>Our team will message you at <strong className="text-secondary-brown">{phone || "your phone number"}</strong> within 4 business hours to confirm your design details and price.</p>
+            <span>Open in WhatsApp to Confirm</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <button
+            onClick={() => setIsSubmitted(false)}
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-4 rounded-xl border border-secondary-brown/20 text-secondary-brown hover:bg-secondary-white font-medium text-base transition-colors duration-200 cursor-pointer"
+          >
+            Design Another Cake
+          </button>
         </div>
-        <button
-          onClick={() => setIsSubmitted(false)}
-          className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-primary-teal text-secondary-white font-medium hover:bg-primary-mustard transition-colors duration-300 shadow-md cursor-pointer"
-        >
-          Design Another Cake
-        </button>
+
+        <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-primary-mustard/20 max-w-md mx-auto text-sm text-secondary-brown/90 mb-2 text-left space-y-2">
+          <p className="font-semibold text-secondary-brown flex items-center gap-2">
+            <svg className="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+            </svg>
+            Direct WhatsApp Booking (+91 91099 91600)
+          </p>
+          <p className="text-xs text-secondary-brown/75 leading-relaxed">
+            If WhatsApp didn't pop up automatically, tap the green button above to send your pre-filled custom cake request directly to our bakery team.
+          </p>
+        </div>
       </div>
     );
   }
@@ -221,8 +304,8 @@ export default function CakeOrderForm() {
                         key={occ}
                         onClick={() => setOccasion(occ)}
                         className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border cursor-pointer ${occasion === occ
-                            ? "bg-secondary-brown text-white border-secondary-brown shadow-sm"
-                            : "bg-secondary-white text-secondary-brown/80 border-secondary-brown/15 hover:border-primary-mustard hover:text-secondary-brown"
+                          ? "bg-secondary-brown text-white border-secondary-brown shadow-sm"
+                          : "bg-secondary-white text-secondary-brown/80 border-secondary-brown/15 hover:border-primary-mustard hover:text-secondary-brown"
                           }`}
                       >
                         {occ}
@@ -263,8 +346,8 @@ export default function CakeOrderForm() {
                         key={opt.id}
                         onClick={() => setTier(opt.id)}
                         className={`text-left p-4 rounded-2xl border transition-all duration-300 relative cursor-pointer ${isSelected
-                            ? "border-primary-mustard bg-primary-mustard/10 shadow-sm ring-2 ring-primary-mustard/40"
-                            : "border-secondary-brown/15 bg-secondary-white hover:border-primary-mustard/50"
+                          ? "border-primary-mustard bg-primary-mustard/10 shadow-sm ring-2 ring-primary-mustard/40"
+                          : "border-secondary-brown/15 bg-secondary-white hover:border-primary-mustard/50"
                           }`}
                       >
                         <div className="flex items-center justify-between mb-1">
@@ -302,8 +385,8 @@ export default function CakeOrderForm() {
                         key={w.id}
                         onClick={() => setWeight(w.id)}
                         className={`p-3 rounded-xl border text-center transition-all duration-200 cursor-pointer ${isSelected
-                            ? "border-primary-mustard bg-primary-mustard text-white shadow-sm"
-                            : "border-secondary-brown/15 bg-secondary-white text-secondary-brown hover:border-primary-mustard/60"
+                          ? "border-primary-mustard bg-primary-mustard text-white shadow-sm"
+                          : "border-secondary-brown/15 bg-secondary-white text-secondary-brown hover:border-primary-mustard/60"
                           }`}
                       >
                         <div className="font-bold text-base">{w.label}</div>
@@ -343,8 +426,8 @@ export default function CakeOrderForm() {
                       key={flav.id}
                       onClick={() => setFlavour(flav.id)}
                       className={`text-left p-4 rounded-2xl border transition-all duration-200 flex flex-col justify-between cursor-pointer ${isSelected
-                          ? "border-primary-teal bg-primary-teal/10 ring-2 ring-primary-teal/40 shadow-sm"
-                          : "border-secondary-brown/15 bg-secondary-white hover:border-primary-teal/40"
+                        ? "border-primary-teal bg-primary-teal/10 ring-2 ring-primary-teal/40 shadow-sm"
+                        : "border-secondary-brown/15 bg-secondary-white hover:border-primary-teal/40"
                         }`}
                     >
                       <div className="flex items-center justify-between mb-1.5">
@@ -551,9 +634,13 @@ export default function CakeOrderForm() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 px-6 rounded-xl bg-primary-teal text-secondary-white font-sans font-bold text-base tracking-wide shadow-md transition-all duration-300 hover:bg-primary-mustard hover:shadow-lg active:scale-[0.99] flex items-center justify-center gap-2 group cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-4 px-6 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-sans font-bold text-base tracking-wide shadow-md transition-all duration-300 hover:shadow-lg active:scale-[0.99] flex items-center justify-center gap-2.5 group cursor-pointer disabled:opacity-75"
               >
-                <span>Request Price Quote</span>
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                </svg>
+                <span>{isSubmitting ? "Preparing WhatsApp..." : "Send Request via WhatsApp"}</span>
                 <svg
                   className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"
@@ -565,7 +652,7 @@ export default function CakeOrderForm() {
               </button>
 
               <p className="text-[11px] text-center text-secondary-brown/60 font-sans mt-3">
-                Our team will contact you on WhatsApp within 4 business hours.
+                Opens directly in WhatsApp (+91 91099 91600) with your cake specifications pre-filled.
               </p>
             </div>
           </div>

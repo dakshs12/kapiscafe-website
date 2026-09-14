@@ -18,16 +18,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: "🏠" },
-    { name: "Menu", href: "/menu", icon: "🍕" },
-    { name: "Custom Cakes", href: "/custom-cakes", icon: "🎂" },
-    { name: "Location", href: "/location", icon: "📍" },
+    { name: "Home", desktopName: "Home", href: "/", number: "01" },
+    { name: "Our Menu", desktopName: "Menu", href: "/menu", number: "02" },
+    { name: "Custom Cakes", desktopName: "Custom Cakes", href: "/custom-cakes", number: "03" },
+    { name: "Location & Hours", desktopName: "Location", href: "/location", number: "04" },
   ];
 
   return (
@@ -68,7 +80,7 @@ export default function Navbar() {
                     isActive ? "text-primary-teal" : "text-secondary-brown hover:text-primary-teal"
                   }`}
                 >
-                  {link.name}
+                  {link.desktopName}
                   
                   {/* Animated Underline */}
                   <span 
@@ -92,7 +104,7 @@ export default function Navbar() {
 
             {/* Hamburger Button */}
             <button 
-              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5"
+              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 cursor-pointer"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -104,34 +116,109 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Professional Mobile Menu Overlay (z-[100] to sit above all page elements) */}
       <div 
-        className={`fixed inset-0 bg-secondary-white z-40 flex flex-col justify-center items-center transition-all duration-500 lg:hidden ${
-          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-secondary-white z-[100] flex flex-col justify-between transition-all duration-300 lg:hidden ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto visible" : "opacity-0 pointer-events-none invisible"
         }`}
       >
-        <div className="flex flex-col items-center gap-8 text-center">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link 
-                key={link.name} 
-                href={link.href} 
-                className={`font-serif text-4xl font-bold transition-colors flex items-center gap-3 ${
-                  isActive ? "text-primary-teal" : "text-secondary-brown"
-                }`}
-              >
-                <span>{link.icon}</span>
-                {link.name}
-              </Link>
-            );
-          })}
+        {/* Top Header inside overlay */}
+        <div className="px-4 sm:px-6 py-3 sm:py-3.5 flex items-center justify-between border-b border-primary-mustard/20 bg-secondary-white">
           <Link 
-            href="/menu" 
-            className="mt-4 px-8 py-4 bg-primary-mustard text-secondary-white font-serif text-xl rounded-full shadow-lg"
+            href="/" 
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center hover:opacity-80 transition-opacity"
           >
-            Order Online
+            <Image 
+              src="/kapis-logo.svg" 
+              alt="Kapi's Bakehouse" 
+              width={120} 
+              height={42} 
+              className="w-28 sm:w-32 h-auto object-contain"
+            />
           </Link>
+
+          <button 
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-10 h-10 rounded-full bg-secondary-brown/5 hover:bg-secondary-brown/10 flex items-center justify-center text-secondary-brown transition-colors cursor-pointer"
+            aria-label="Close menu"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Central Navigation Items */}
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 max-w-md mx-auto w-full py-6">
+          <span className="text-[11px] uppercase tracking-widest font-bold text-primary-mustard font-sans mb-3">
+            Navigation
+          </span>
+
+          <div className="flex flex-col divide-y divide-secondary-brown/10">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-4 flex items-center justify-between group transition-colors"
+                >
+                  <div className="flex items-baseline gap-3.5">
+                    <span className={`text-xs font-mono font-bold tracking-wider transition-colors ${
+                      isActive ? "text-primary-teal" : "text-primary-mustard/70 group-hover:text-primary-mustard"
+                    }`}>
+                      {link.number}
+                    </span>
+                    <span className={`font-serif text-2xl sm:text-3xl font-bold transition-all duration-200 ${
+                      isActive 
+                        ? "text-primary-teal translate-x-1" 
+                        : "text-secondary-brown group-hover:text-primary-mustard group-hover:translate-x-1"
+                    }`}>
+                      {link.name}
+                    </span>
+                  </div>
+
+                  <svg 
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActive 
+                        ? "text-primary-teal opacity-100" 
+                        : "text-secondary-brown/30 opacity-0 group-hover:opacity-100 group-hover:text-primary-mustard group-hover:translate-x-1"
+                    }`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-8">
+            <Link 
+              href="/menu" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-3.5 px-6 rounded-2xl bg-primary-mustard hover:bg-primary-mustard/90 text-white font-sans font-bold text-base shadow-md flex items-center justify-center gap-2 tracking-wide transition-all active:scale-[0.99]"
+            >
+              <span>Order Online</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+
+        {/* Bottom Bar inside overlay */}
+        <div className="px-6 py-4 border-t border-secondary-brown/10 bg-[#FAF7F2] text-center font-sans">
+          <p className="text-xs text-secondary-brown/75 font-medium">
+            Born in Pithampur • Fresh Bakes, Happy Days
+          </p>
+          <p className="text-[11px] text-primary-mustard font-semibold mt-0.5">
+            +91 91099 91600
+          </p>
         </div>
       </div>
     </>

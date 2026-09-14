@@ -161,15 +161,15 @@ export default function MenuPage() {
       <section className="pb-16 px-4 sm:px-6 md:px-12 max-w-6xl mx-auto w-full relative">
 
         {/* Sticky Tab Navigation */}
-        <div className="sticky top-[58px] sm:top-[62px] md:top-[66px] z-40 bg-secondary-white/95 backdrop-blur-md pt-3 pb-3 sm:pt-4 sm:pb-4 mb-8 sm:mb-10 -mx-4 px-4 md:mx-0 md:px-0 border-b border-stone-200">
-          <div className="flex overflow-x-auto hide-scrollbar items-center justify-start md:justify-center gap-2.5 sm:gap-4">
+        <div className="sticky top-[58px] sm:top-[62px] md:top-[66px] z-30 bg-secondary-white/95 backdrop-blur-md pt-2.5 pb-2.5 sm:pt-4 sm:pb-4 mb-6 sm:mb-10 -mx-4 px-4 md:mx-0 md:px-0 border-b border-stone-200">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 md:gap-3">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleFilter(cat)}
-                className={`flex-shrink-0 whitespace-nowrap px-4 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm md:text-base font-sans transition-all duration-300 cursor-pointer ${activeCategory === cat
+                className={`whitespace-nowrap px-3.5 py-1.5 sm:px-5 sm:py-2 md:px-6 md:py-2.5 rounded-full font-bold text-xs sm:text-sm md:text-base font-sans transition-all duration-300 cursor-pointer ${activeCategory === cat
                     ? "bg-[#26BCB8] text-white shadow-md"
-                    : "bg-transparent border border-stone-300 text-stone-500 hover:bg-stone-100 hover:text-[#362417]"
+                    : "bg-white/80 border border-stone-300 text-stone-600 hover:bg-stone-100 hover:text-[#362417]"
                   }`}
               >
                 {cat}

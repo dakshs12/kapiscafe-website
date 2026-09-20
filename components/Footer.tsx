@@ -1,7 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <footer className="w-full bg-secondary-brown text-secondary-white pt-8 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 md:px-10 lg:px-12 border-t-[5px] border-primary-mustard mt-auto z-10 relative">
       {/* MOBILE LAYOUT (< sm) */}

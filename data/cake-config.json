@@ -1,0 +1,35 @@
+{
+  "minNoticeHours": 48,
+  "flavours": [
+    {
+      "id": "Belgian Truffle",
+      "name": "Belgian Truffle",
+      "notes": "Rich dark chocolate & smooth cream"
+    },
+    {
+      "id": "Biscoff Crunch",
+      "name": "Biscoff Crunch",
+      "notes": "Caramelized lotus biscuits & creamy layers"
+    },
+    {
+      "id": "Red Velvet",
+      "name": "Red Velvet",
+      "notes": "Soft red sponge with cream cheese frosting"
+    },
+    {
+      "id": "Fresh Fruit Vanilla",
+      "name": "Fresh Fruit Vanilla",
+      "notes": "Pure vanilla sponge with seasonal fresh fruits"
+    },
+    {
+      "id": "Pistachio Rose",
+      "name": "Pistachio Rose",
+      "notes": "Pistachio sponge with light rose cream"
+    },
+    {
+      "id": "Custom Flavour",
+      "name": "Custom / Other Flavour",
+      "notes": "Tell us your own favourite flavour combination"
+    }
+  ]
+}

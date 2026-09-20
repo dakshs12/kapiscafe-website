@@ -42,6 +42,10 @@ export default function Navbar() {
     { name: "Location & Hours", desktopName: "Location", href: "/location", number: "04" },
   ];
 
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <>
       <nav 

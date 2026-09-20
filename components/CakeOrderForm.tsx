@@ -1,10 +1,38 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { submitCustomCakeOrder } from "@/app/actions";
+import { submitCustomCakeOrder, getCakeConfig } from "@/app/actions";
+import { CakeConfig, CakeFlavour } from "@/lib/cakes-server";
 import CustomDatePicker from "./CustomDatePicker";
 
-export default function CakeOrderForm() {
+const DEFAULT_FLAVOURS: CakeFlavour[] = [
+  { id: "Belgian Truffle", name: "Belgian Truffle", notes: "Rich dark chocolate & smooth cream" },
+  { id: "Biscoff Crunch", name: "Biscoff Crunch", notes: "Caramelized lotus biscuits & creamy layers" },
+  { id: "Red Velvet", name: "Red Velvet", notes: "Soft red sponge with cream cheese frosting" },
+  { id: "Fresh Fruit Vanilla", name: "Fresh Fruit Vanilla", notes: "Pure vanilla sponge with seasonal fresh fruits" },
+  { id: "Pistachio Rose", name: "Pistachio Rose", notes: "Pistachio sponge with light rose cream" },
+  { id: "Custom Flavour", name: "Custom / Other Flavour", notes: "Tell us your own favourite flavour combination" },
+];
+
+interface CakeOrderFormProps {
+  initialConfig?: CakeConfig;
+}
+
+export default function CakeOrderForm({ initialConfig }: CakeOrderFormProps = {}) {
+  const [config, setConfig] = useState<CakeConfig>(
+    initialConfig || { minNoticeHours: 48, flavours: DEFAULT_FLAVOURS }
+  );
+
+  useEffect(() => {
+    if (!initialConfig) {
+      getCakeConfig().then((cfg) => {
+        if (cfg && cfg.flavours && cfg.flavours.length > 0) {
+          setConfig(cfg);
+        }
+      });
+    }
+  }, [initialConfig]);
+
   // Form State
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -12,28 +40,40 @@ export default function CakeOrderForm() {
   const [occasion, setOccasion] = useState("Birthday");
   const [tier, setTier] = useState("2-Tier");
   const [weight, setWeight] = useState("2kg");
-  const [flavour, setFlavour] = useState("Belgian Truffle");
+  const [flavour, setFlavour] = useState(
+    initialConfig?.flavours?.[0]?.id || "Belgian Truffle"
+  );
   const [customFlavour, setCustomFlavour] = useState("");
   const [notes, setNotes] = useState("");
   const [topperText, setTopperText] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [minDate, setMinDate] = useState("");
 
-  // Set min date (48 hours from today) on client mount to avoid hydration mismatch
+  // Sync flavour if config updates and selected flavour is no longer available
+  useEffect(() => {
+    if (config.flavours && config.flavours.length > 0) {
+      if (!config.flavours.some((f) => f.id === flavour)) {
+        setFlavour(config.flavours[0].id);
+      }
+    }
+  }, [config.flavours, flavour]);
+
+  // Set min date based on config.minNoticeHours from today on client mount to avoid hydration mismatch
   useEffect(() => {
     const d = new Date();
-    d.setDate(d.getDate() + 2);
+    const noticeHours = config.minNoticeHours || 48;
+    d.setHours(d.getHours() + noticeHours);
     const yyyy = d.getFullYear();
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     const dd = String(d.getDate()).padStart(2, "0");
     setMinDate(`${yyyy}-${mm}-${dd}`);
-  }, []);
+  }, [config.minNoticeHours]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Helper formatting for summary date
   const formatDisplayDate = (dString: string) => {
-    if (!dString) return "Date to be confirmed (min. 48h)";
+    if (!dString) return `Date to be confirmed (min. ${config.minNoticeHours || 48}h)`;
     const dateObj = new Date(dString + "T00:00:00");
     if (isNaN(dateObj.getTime())) return dString;
     return dateObj.toLocaleDateString("en-US", {
@@ -59,14 +99,8 @@ export default function CakeOrderForm() {
     { id: "3kg+", label: "3kg+", serves: "30+ guests" },
   ];
 
-  const flavourOptions = [
-    { id: "Belgian Truffle", name: "Belgian Truffle", notes: "Rich dark chocolate & smooth cream" },
-    { id: "Biscoff Crunch", name: "Biscoff Crunch", notes: "Caramelized lotus biscuits & creamy layers" },
-    { id: "Red Velvet", name: "Red Velvet", notes: "Soft red sponge with cream cheese frosting" },
-    { id: "Fresh Fruit Vanilla", name: "Fresh Fruit Vanilla", notes: "Pure vanilla sponge with seasonal fresh fruits" },
-    { id: "Pistachio Rose", name: "Pistachio Rose", notes: "Pistachio sponge with light rose cream" },
-    { id: "Custom Flavour", name: "Custom / Other Flavour", notes: "Tell us your own favourite flavour combination" },
-  ];
+  const flavourOptions = config.flavours && config.flavours.length > 0 ? config.flavours : DEFAULT_FLAVOURS;
+
 
   // Effective flavour label for preview
   const displayFlavour =
@@ -276,7 +310,7 @@ export default function CakeOrderForm() {
                       Event / Celebration Date <span className="text-primary-mustard">*</span>
                     </label>
                     <span className="text-xs text-primary-mustard font-medium">
-                      Minimum 48 hours notice required
+                      Minimum {config.minNoticeHours || 48} hours notice required
                     </span>
                   </div>
                   <CustomDatePicker
@@ -288,7 +322,7 @@ export default function CakeOrderForm() {
                     required
                   />
                   <p className="text-[11px] text-secondary-brown/60">
-                    Orders require at least 48 hours notice so our chefs can bake and decorate your cake fresh.
+                    Orders require at least {config.minNoticeHours || 48} hours notice so our chefs can bake and decorate your cake fresh.
                   </p>
                 </div>
 
@@ -672,7 +706,7 @@ export default function CakeOrderForm() {
                 Important Order Notice
               </span>
               <p className="text-secondary-brown text-sm sm:text-base leading-relaxed">
-                <strong>Please note:</strong> Custom cakes need at least <strong>48 hours</strong> to prepare. Our team will contact you on WhatsApp within <strong>4 business hours</strong> to discuss your design and give you the final price.
+                <strong>Please note:</strong> Custom cakes need at least <strong>{config.minNoticeHours || 48} hours</strong> to prepare. Our team will contact you on WhatsApp within <strong>4 business hours</strong> to discuss your design and give you the final price.
               </p>
             </div>
             <a

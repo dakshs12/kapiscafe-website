@@ -1,9 +1,12 @@
-"use client";
-
 import React from "react";
 import CakeOrderForm from "@/components/CakeOrderForm";
+import { getCakeConfigServer } from "@/lib/cakes-server";
 
-export default function CustomCakesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CustomCakesPage() {
+  const config = await getCakeConfigServer();
+
   return (
     <div
       className="min-h-screen bg-secondary-white text-secondary-brown relative"
@@ -72,8 +75,9 @@ export default function CustomCakesPage() {
 
         {/* CAKE ORDER FORM & SUMMARY */}
         <section className="w-full">
-          <CakeOrderForm />
+          <CakeOrderForm initialConfig={config} />
         </section>
+
 
       </div>
     </div>

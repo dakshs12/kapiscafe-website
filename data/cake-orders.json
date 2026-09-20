@@ -1,0 +1,58 @@
+[
+  {
+    "id": "cake-1726750000000",
+    "name": "Priya Malhotra",
+    "phone": "+91 97112 33445",
+    "date": "2026-10-02",
+    "occasion": "Anniversary",
+    "tier": "Single Tier",
+    "weight": "1kg",
+    "flavour": "Red Velvet",
+    "topper": "Happy 10th Anniversary",
+    "notes": "Vintage lambeth piping with deep crimson cherries.",
+    "status": "Confirmed",
+    "createdAt": "2026-09-19T08:45:00.000Z"
+  },
+  {
+    "id": "cake-1726746000000",
+    "name": "Rohan Patel",
+    "phone": "+91 98234 11223",
+    "date": "2026-09-28",
+    "occasion": "Wedding",
+    "tier": "3-Tier",
+    "weight": "3kg+",
+    "flavour": "Biscoff Crunch",
+    "topper": "Rohan & Meera",
+    "notes": "Rustic semi-naked finish with rosemary and eucalyptus leaves.",
+    "status": "Contacted",
+    "createdAt": "2026-09-18T14:15:00.000Z"
+  },
+  {
+    "id": "cake-1726742400000",
+    "name": "Anya Sharma",
+    "phone": "+91 98765 43210",
+    "date": "2026-09-24",
+    "occasion": "Birthday",
+    "tier": "2-Tier",
+    "weight": "2kg",
+    "flavour": "Belgian Truffle",
+    "topper": "Happy 25th Anya",
+    "notes": "Pastel pink and gold palette, fresh floral accents if possible.",
+    "status": "Contacted",
+    "createdAt": "2026-09-18T10:30:00.000Z"
+  },
+  {
+    "id": "cake-1726754000000",
+    "name": "Vikram Singh",
+    "phone": "+91 99887 66554",
+    "date": "2026-09-21",
+    "occasion": "Milestone",
+    "tier": "2-Tier",
+    "weight": "2kg",
+    "flavour": "Pistachio Rose",
+    "topper": "Cheers to 50",
+    "notes": "Classic gold foil leaf detailing and pistachio crumb around the base.",
+    "status": "Completed",
+    "createdAt": "2026-09-16T11:20:00.000Z"
+  }
+]

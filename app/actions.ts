@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 import {
   CakeOrder,
@@ -14,6 +15,19 @@ import {
   getCakeConfigServer,
   updateCakeConfigServer,
 } from "@/lib/cakes-server";
+
+import { MenuItem } from "@/lib/cms-utils";
+import {
+  getMenuItemsServer,
+  addMenuItemServer,
+  updateMenuItemServer,
+  deleteMenuItemServer,
+  toggleItemAvailabilityServer,
+} from "@/lib/menu-server";
+
+// ==========================================
+// CUSTOM CAKE ORDERS PUBLIC SUBMISSION
+// ==========================================
 
 export async function submitCustomCakeOrder(formData: FormData) {
   try {
@@ -43,16 +57,18 @@ export async function submitCustomCakeOrder(formData: FormData) {
     console.log("🎂 Custom Cake Order Persisted:", newOrder);
 
     revalidatePath("/admin/cakes");
-    revalidatePath("/admin/orders");
     revalidatePath("/admin");
 
     return { success: true, order: newOrder };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error submitting custom cake order:", error);
-    return { success: false, error: "Failed to persist cake inquiry." };
+    return { success: false, error: error?.message || "Failed to persist cake inquiry." };
   }
 }
 
+// ==========================================
+// ADMIN AUTHENTICATION ACTIONS
+// ==========================================
 
 export async function adminLogin(formData: FormData) {
   const password = formData.get("password");
@@ -84,15 +100,9 @@ export async function verifyAdminSession() {
   return cookieStore.get("admin_session")?.value === "authenticated";
 }
 
-import { MenuItem } from "@/lib/cms-utils";
-import {
-  getMenuItemsServer,
-  addMenuItemServer,
-  updateMenuItemServer,
-  deleteMenuItemServer,
-  toggleItemAvailabilityServer,
-} from "@/lib/menu-server";
-import { revalidatePath } from "next/cache";
+// ==========================================
+// MENU MANAGEMENT SERVER ACTIONS
+// ==========================================
 
 export async function getMenuItems(): Promise<MenuItem[]> {
   return getMenuItemsServer();
@@ -112,9 +122,9 @@ export async function createMenuItem(
     revalidatePath("/admin/menu");
     revalidatePath("/admin");
     return { success: true, item: newItem };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to create menu item:", error);
-    return { success: false, error: "Failed to create menu item." };
+    return { success: false, error: error?.message || "Failed to create menu item." };
   }
 }
 
@@ -137,9 +147,9 @@ export async function updateMenuItem(
     revalidatePath("/admin/menu");
     revalidatePath("/admin");
     return { success: true, item: updated };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to update menu item:", error);
-    return { success: false, error: "Failed to update menu item." };
+    return { success: false, error: error?.message || "Failed to update menu item." };
   }
 }
 
@@ -159,9 +169,9 @@ export async function deleteMenuItem(id: string) {
     revalidatePath("/admin/menu");
     revalidatePath("/admin");
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to delete menu item:", error);
-    return { success: false, error: "Failed to delete menu item." };
+    return { success: false, error: error?.message || "Failed to delete menu item." };
   }
 }
 
@@ -181,9 +191,9 @@ export async function toggleItemAvailability(id: string) {
     revalidatePath("/admin/menu");
     revalidatePath("/admin");
     return { success: true, item: updated };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to toggle item availability:", error);
-    return { success: false, error: "Failed to toggle availability." };
+    return { success: false, error: error?.message || "Failed to toggle availability." };
   }
 }
 
@@ -208,12 +218,11 @@ export async function updateCakeOrderStatus(id: string, status: CakeOrderStatus)
     }
 
     revalidatePath("/admin/cakes");
-    revalidatePath("/admin/orders");
     revalidatePath("/admin");
     return { success: true, order: updated };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to update cake order status:", error);
-    return { success: false, error: "Failed to update order status." };
+    return { success: false, error: error?.message || "Failed to update order status." };
   }
 }
 
@@ -230,12 +239,11 @@ export async function deleteCakeOrder(id: string) {
     }
 
     revalidatePath("/admin/cakes");
-    revalidatePath("/admin/orders");
     revalidatePath("/admin");
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to delete cake order:", error);
-    return { success: false, error: "Failed to delete cake order." };
+    return { success: false, error: error?.message || "Failed to delete cake order." };
   }
 }
 
@@ -254,10 +262,8 @@ export async function updateCakeConfig(config: CakeConfig) {
     revalidatePath("/custom-cakes");
     revalidatePath("/admin/cakes");
     return { success: true, config: updated };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to update cake configuration:", error);
-    return { success: false, error: "Failed to update configuration." };
+    return { success: false, error: error?.message || "Failed to update configuration." };
   }
 }
-
-

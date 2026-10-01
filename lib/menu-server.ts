@@ -1,35 +1,18 @@
-import fs from "fs/promises";
-import path from "path";
 import { MenuItem } from "./cms-utils";
-
-const DATA_PATH = path.join(process.cwd(), "data", "menu.json");
+import { readJsonStorage, writeJsonStorage } from "./storage-helper";
 
 /**
- * Reads all menu items from data/menu.json on server
+ * Reads all menu items from persistent storage (local disk, /tmp, or Cloud KV)
  */
 export async function getMenuItemsServer(): Promise<MenuItem[]> {
-  try {
-    const fileContent = await fs.readFile(DATA_PATH, "utf8");
-    const items: MenuItem[] = JSON.parse(fileContent);
-    return items;
-  } catch (error) {
-    console.error("Error reading menu.json:", error);
-    return [];
-  }
+  return readJsonStorage<MenuItem[]>("menu", "menu.json", []);
 }
 
 /**
- * Saves all menu items to data/menu.json on server
+ * Saves all menu items to persistent storage (local disk, /tmp, or Cloud KV)
  */
 export async function saveMenuItemsServer(items: MenuItem[]): Promise<void> {
-  const dir = path.dirname(DATA_PATH);
-  try {
-    await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(DATA_PATH, JSON.stringify(items, null, 2), "utf8");
-  } catch (error) {
-    console.error("Error saving menu.json:", error);
-    throw new Error("Failed to save menu items.");
-  }
+  await writeJsonStorage("menu", "menu.json", items);
 }
 
 /**
